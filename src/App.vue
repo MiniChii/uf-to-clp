@@ -5,7 +5,7 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
   <header>
-    
+
     <div class="wrapper">
       <HelloWorld msg="Conversor de UF!" />
 
@@ -20,8 +20,6 @@ import HelloWorld from './components/HelloWorld.vue'
 </template>
 
 <style scoped>
-
-
 header {
   line-height: 1.5;
   max-height: 100vh;
