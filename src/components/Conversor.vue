@@ -4,9 +4,12 @@ import { ref, watchEffect } from 'vue'
 const date = ref('')
 //"https://mindicador.cl/api/uf/07-06-2023"
 const API_URL = "https://mindicador.cl/api/uf"
-const UFresponse = ref(null)
+const UFresponse: any = ref(null)
 const formatedDate = ref()
-formatedDate.value = '07-06-2023'
+const today = new Date().toJSON().substring(0, 10);
+date.value = today;
+formatedDate.value = formatDate(today);
+
 
 
 function onInput(e: any) {
@@ -24,6 +27,7 @@ function formatDate(rawDate: String) {
 watchEffect(async () => {
   // this effect will run immediately and then
   // re-run whenever currentBranch.value changes
+  //TODO: add loading
   const url = `${API_URL}/${formatedDate.value}`
   console.log(url);
   UFresponse.value = await (await fetch(url)).json()
@@ -35,17 +39,29 @@ watchEffect(async () => {
 <template>
   <div class="date-section">
     <div class="input-group mb-3 row">
-      <label class="fw-bold col-4">
+      <label class="fw-bold col-5">
         Elija una fecha:
       </label>
-      <div class="col-8">
+      <div class="col-7">
         <input type="date" class="form-control" placeholder="Username" aria-label="Username" :value="date"
           @input="onInput">
       </div>
     </div>
   </div>
 
-  <div>Valor UF el {{ date }}: {{ UFresponse.serie[0].valor }}</div>
+  <div class="mb-3 row">
+    <p class="col-4"> Valor UF </p>
+    <p class="col-4"> {{ UFresponse ? UFresponse.serie[0].valor + " CLP" : "" }}</p>
+    <p class="col-4"> al {{ formatedDate }}</p>
+
+
+
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.date-section {
+  margin-top: 1em;
+
+}
+</style>

@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import Title from './components/Title.vue'
 </script>
 
 <template>
   <header>
 
     <div class="wrapper">
-      <HelloWorld msg="Conversor de UF!" />
+      <Title msg="Conversor de UF!" />
 
       <nav>
         <RouterLink to="/">Conversor</RouterLink>
